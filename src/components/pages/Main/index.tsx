@@ -38,7 +38,7 @@ const Title = styled.p`
 `;
 const FooterSection = styled.section`
   width: 100%;
-  margin-top: auto;
+  margin-top: min(25%, 120px);
   padding: 0 32px;
 
   & > button:first-child {
@@ -56,12 +56,9 @@ const TopSection = styled.section`
 `;
 const MainWrapper = styled.section`
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   padding: 120px 0;
 
   background-color: ${({ theme }) => theme.colors.black};
