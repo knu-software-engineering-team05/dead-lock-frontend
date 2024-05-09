@@ -1,8 +1,11 @@
-import React from 'react';
-import Main from './components/pages/Main';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  return <Main />;
+  return (
+    <div className="App">
+      <Outlet />
+    </div>
+  );
 }
 
 export default App;
