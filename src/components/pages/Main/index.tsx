@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 import React from 'react';
-import Button from '../../common/Button';
+import { Button } from '../../common/Button';
+import { useNavigate } from 'react-router-dom';
+import { PATHS } from '../../../router';
 
 const Main: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <MainWrapper>
       <TopSection>
@@ -17,8 +21,8 @@ const Main: React.FC = () => {
       <MainImage src="/images/main.png" alt="main" />
 
       <FooterSection>
-        <Button.Contained>로그인</Button.Contained>
-        <Button.Outlined>회원가입</Button.Outlined>
+        <Button.Contained onClick={() => navigate(PATHS.SIGN_IN)}>로그인</Button.Contained>
+        <Button.Outlined onClick={() => navigate(PATHS.SIGN_UP)}>회원가입</Button.Outlined>
       </FooterSection>
     </MainWrapper>
   );
