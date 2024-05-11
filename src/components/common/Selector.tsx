@@ -13,14 +13,19 @@ type SelectorProps<T> = {
 const Selector = <T,>({ options, selected, setSelected }: SelectorProps<T>) => (
   <SelectorWrapper>
     {options.map((option) => (
-      <SelectorItem key={option.label} $selected={selected === option.value} onClick={() => setSelected(option.value)}>
+      <SelectorItem
+        key={option.label}
+        $selected={selected === option.value}
+        onClick={() => setSelected(option.value)}
+        $widthPercent={`${100 / options.length}%`}
+      >
         {option.label}
       </SelectorItem>
     ))}
   </SelectorWrapper>
 );
-const SelectorItem = styled.button<{ $selected: boolean }>`
-  width: 50%;
+const SelectorItem = styled.button<{ $selected: boolean; $widthPercent: string }>`
+  width: ${({ $widthPercent }) => $widthPercent};
   height: 100%;
   background-color: ${({ $selected, theme }) => ($selected ? theme.colors.primary : theme.colors.white)};
   color: ${({ $selected, theme }) => ($selected ? theme.colors.white : theme.colors.primary)};
