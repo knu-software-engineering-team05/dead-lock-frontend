@@ -49,6 +49,6 @@ export const theme = {
       fontWeight: 'normal',
     },
   },
-};
+} as const;
 
 export type Theme = typeof theme;
