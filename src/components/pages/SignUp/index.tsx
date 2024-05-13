@@ -55,7 +55,7 @@ const SignUp: React.FC = () => {
             onChange={(e) => setPasswordConfirm(e.target.value)}
           />
           <Input label="나이" placeholder="나이를 입력해 주세요" value={age} onChange={(e) => setAge(e.target.value)} />
-          <SelectorWithLabel label="성별" options={SEX_OPTIONS} selected={sex} setSelected={setSex} />
+          <SelectorWithLabel label="성별" options={SEX_OPTIONS} selected={sex} onSelected={setSex} />
         </InputSection>
         <Button.Contained>가입하기</Button.Contained>
       </ContentWrapper>

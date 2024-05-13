@@ -1,22 +1,14 @@
 import styled from 'styled-components';
 import { Label } from './Label';
+import { CommonSelectType } from '../../types/select';
 
-type Item<T = string> = {
-  value: T;
-  label: string;
-};
-type SelectorProps<T> = {
-  options: Item<T>[];
-  selected: T;
-  setSelected: (value: T) => void;
-};
-const Selector = <T,>({ options, selected, setSelected }: SelectorProps<T>) => (
+const Selector = <T,>({ options, selected, onSelected }: CommonSelectType<T>) => (
   <SelectorWrapper>
     {options.map((option) => (
       <SelectorItem
         key={option.label}
         $selected={selected === option.value}
-        onClick={() => setSelected(option.value)}
+        onClick={() => onSelected(option.value)}
         $widthPercent={`${100 / options.length}%`}
       >
         {option.label}
@@ -44,7 +36,7 @@ const SelectorWrapper = styled.div`
   padding: 4px;
 `;
 
-const SelectorWithLabel = <T,>({ label, ...restProps }: SelectorProps<T> & { label: string }) => (
+const SelectorWithLabel = <T,>({ label, ...restProps }: CommonSelectType<T> & { label: string }) => (
   <SelectorWithLabelWrapper>
     <Label>{label}</Label>
     <Selector {...restProps} />
