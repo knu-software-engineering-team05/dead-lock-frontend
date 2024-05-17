@@ -11,7 +11,7 @@
 1. Git Clone
 
 ```cmd
-$ git clone https://github.com/2024S-Style-Transfer/visual-fable-front.git
+$ git clone https://github.com/knu-software-engineering-team05/dead-lock-frontend
 ```
 
 2. Install package (* yarn을 추천드립니다.)
