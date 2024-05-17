@@ -17,7 +17,7 @@ const ContainedButton = styled(ButtonBase)`
   color: ${({ theme }) => theme.colors.white};
 `;
 const OutlinedButton = styled(ButtonBase)`
-  border: ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   background-color: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.primary};
 `;
