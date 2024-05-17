@@ -12,6 +12,8 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   button {
+    cursor: pointer;
+    padding: 0;
     border: 0;
     outline: 0;
     background-color: transparent;
