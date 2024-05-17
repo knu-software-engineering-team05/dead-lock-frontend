@@ -2,13 +2,14 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import { Input } from '../../common/Input';
 import { BackButton, Button } from '../../common/Button';
+import { CommonWrapper } from '../../common/Wrapper';
 
 const SignIn: React.FC = () => {
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   return (
-    <SignInWrapper>
+    <CommonWrapper>
       <BackButton />
 
       <ContentWrapper>
@@ -34,7 +35,7 @@ const SignIn: React.FC = () => {
         </InputSection>
         <Button.Contained>로그인</Button.Contained>
       </ContentWrapper>
-    </SignInWrapper>
+    </CommonWrapper>
   );
 };
 
@@ -50,10 +51,6 @@ const MainText = styled.p`
 const ContentWrapper = styled.section`
   margin-top: 24px;
   padding: 0 8px;
-`;
-const SignInWrapper = styled.section`
-  padding: 40px 16px;
-  height: 100vh;
 `;
 
 export default SignIn;

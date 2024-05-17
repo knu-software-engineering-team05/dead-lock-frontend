@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Input } from '../../common/Input';
 import { BackButton, Button } from '../../common/Button';
 import { SelectorWithLabel } from '../../common/Selector';
+import { CommonWrapper } from '../../common/Wrapper';
 
 const SEX = {
   MAN: 'MAN',
@@ -22,7 +23,7 @@ const SignUp: React.FC = () => {
   const [sex, setSex] = useState<keyof typeof SEX>(SEX.MAN);
 
   return (
-    <SignUpWrapper>
+    <CommonWrapper>
       <BackButton />
 
       <ContentWrapper>
@@ -59,7 +60,7 @@ const SignUp: React.FC = () => {
         </InputSection>
         <Button.Contained>가입하기</Button.Contained>
       </ContentWrapper>
-    </SignUpWrapper>
+    </CommonWrapper>
   );
 };
 
@@ -81,10 +82,6 @@ const Title = styled.p`
 const ContentWrapper = styled.section`
   margin-top: 24px;
   padding: 0 8px;
-`;
-const SignUpWrapper = styled.section`
-  padding: 40px 16px;
-  height: 100vh;
 `;
 
 export default SignUp;
