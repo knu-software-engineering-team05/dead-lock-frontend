@@ -7,6 +7,7 @@ import { CommonWrapper } from '../../common/Wrapper';
 import { SvgPlus, SvgStethoscope } from '../../../svgs';
 import { theme } from '../../../theme';
 import { MOCK_RESULTS, MockResultType } from '../../../mock';
+import { createPathWithParams } from '../../../utils/createPathWithParams';
 
 const ResultList: React.FC = () => {
   const navigate = useNavigate();
@@ -28,7 +29,10 @@ const ResultList: React.FC = () => {
         )}
         {results.length > 0 &&
           results.map((result) => (
-            <ResultItem key={result.id}>
+            <ResultItem
+              key={result.id}
+              onClick={() => navigate(createPathWithParams(PATHS.RESULT_DETAIL, { id: result.id }))}
+            >
               <SvgTextWrapper>
                 <SvgStethoscope width="24px" height="24px" fill={theme.colors.primary} />
                 <CommonResultItemText>

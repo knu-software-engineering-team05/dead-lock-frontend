@@ -14,7 +14,7 @@ export const PATHS = {
   SIGN_UP: '/signup',
   RESULT_LIST: '/results',
   RESULT_DETAIL: '/results/:id',
-  SUGGEST_PROGRAM: '/results/:id/programs',
+  HELPFUL_PROGRAMS: '/results/:id/programs',
   TEST: '/test',
 } as const;
 
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <ResultDetail />,
       },
       {
-        path: PATHS.SUGGEST_PROGRAM,
+        path: PATHS.HELPFUL_PROGRAMS,
         element: <HelpfulPrograms />,
       },
       {

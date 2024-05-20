@@ -4,6 +4,8 @@ import { Input } from '../../common/Input';
 import { BackButton, Button } from '../../common/Button';
 import { SelectorWithLabel } from '../../common/Selector';
 import { CommonWrapper } from '../../common/Wrapper';
+import { useNavigate } from 'react-router-dom';
+import { PATHS } from '../../../router';
 
 const SEX = {
   MAN: 'MAN',
@@ -15,12 +17,19 @@ const SEX_OPTIONS = [
 ];
 
 const SignUp: React.FC = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState<string>('');
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-  const [age, setAge] = useState<string>('');
+  const [birthDate, setBirthDate] = useState<string>('');
   const [sex, setSex] = useState<keyof typeof SEX>(SEX.MAN);
+
+  // TODO: 회원가입 요청 + 로그인 페이지로 이동
+  const handleSingUp = async () => {
+    navigate(PATHS.SIGN_IN, { replace: true });
+  };
 
   return (
     <CommonWrapper>
@@ -55,10 +64,15 @@ const SignUp: React.FC = () => {
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
           />
-          <Input label="나이" placeholder="나이를 입력해 주세요" value={age} onChange={(e) => setAge(e.target.value)} />
+          <Input
+            label="생년월일"
+            placeholder="생년월일 8자리를 입력해 주세요 (YYYYMMDD)"
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
+          />
           <SelectorWithLabel label="성별" options={SEX_OPTIONS} selected={sex} onSelected={setSex} />
         </InputSection>
-        <Button.Contained>가입하기</Button.Contained>
+        <Button.Contained onClick={handleSingUp}>가입하기</Button.Contained>
       </ContentWrapper>
     </CommonWrapper>
   );

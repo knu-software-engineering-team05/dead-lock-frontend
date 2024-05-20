@@ -46,7 +46,7 @@ const FooterSection = styled.section`
   padding: 0 32px;
 
   & > button:first-child {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 `;
 const MainImage = styled.img`

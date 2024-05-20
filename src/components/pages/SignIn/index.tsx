@@ -3,10 +3,19 @@ import React, { useState } from 'react';
 import { Input } from '../../common/Input';
 import { BackButton, Button } from '../../common/Button';
 import { CommonWrapper } from '../../common/Wrapper';
+import { useNavigate } from 'react-router-dom';
+import { PATHS } from '../../../router';
 
 const SignIn: React.FC = () => {
+  const navigate = useNavigate();
+
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  // TODO: 로그인 요청
+  const handleSingIn = async () => {
+    navigate(PATHS.RESULT_LIST);
+  };
 
   return (
     <CommonWrapper>
@@ -33,7 +42,7 @@ const SignIn: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </InputSection>
-        <Button.Contained>로그인</Button.Contained>
+        <Button.Contained onClick={handleSingIn}>로그인</Button.Contained>
       </ContentWrapper>
     </CommonWrapper>
   );

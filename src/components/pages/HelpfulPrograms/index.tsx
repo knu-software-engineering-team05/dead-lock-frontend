@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import { Button } from '../../common/Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PATHS } from '../../../router';
 import { CommonWrapper, ReportBox } from '../../common/Wrapper';
 import { MOCK_RESULTS, MockResultType } from '../../../mock';
+import { createPathWithParams } from '../../../utils/createPathWithParams';
 
 const HelpfulPrograms: React.FC = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [result, setResult] = useState<MockResultType>(MOCK_RESULTS[0]);
@@ -22,12 +24,18 @@ const HelpfulPrograms: React.FC = () => {
 
       <ReportWrapper>
         <ReportLabel>생활습관 개선</ReportLabel>
-        <ReportBox $height="calc(100vh - 487px)">{result.helpfulPrograms.lifestyle}</ReportBox>
+        <ReportBox $height="calc(100vh - 545px)">{result.helpfulPrograms.lifestyle}</ReportBox>
       </ReportWrapper>
 
-      <Button.Contained onClick={() => navigate(PATHS.SIGN_IN)} style={{ marginTop: '16px' }}>
+      <Button.Contained
+        onClick={() => navigate(createPathWithParams(PATHS.RESULT_DETAIL, { id: result.id }))}
+        style={{ marginTop: '16px' }}
+      >
         종합진단결과 확인
       </Button.Contained>
+      <Button.Outlined onClick={() => navigate(PATHS.RESULT_LIST)} style={{ marginTop: '8px' }}>
+        진단결과 목록으로 돌아가기
+      </Button.Outlined>
     </HelpfulProgramsWrapper>
   );
 };
