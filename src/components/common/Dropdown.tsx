@@ -1,11 +1,44 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { SvgChevronDown } from '../../svgs';
 import { CommonSelectType } from '../../types/select';
 import useOutAreaClick from '../../utils/useOutAreaClick';
+import { Label } from './Label';
 
-const Dropdown = <T extends string>({ options, selected, onSelected }: CommonSelectType<T>) => {
+type DropdownProps<T> = DropdownBaseProps<T> & {
+  label?: string;
+};
+const Dropdown = <T extends string>({ label, ...dropdownProps }: DropdownProps<T>) => {
+  if (!label) {
+    return <DropdownBase {...dropdownProps} />;
+  }
+
+  return (
+    <DropdownWrapper>
+      <Label>{label}</Label>
+      <DropdownBase {...dropdownProps} />
+    </DropdownWrapper>
+  );
+};
+
+const DropdownWrapper = styled.div`
+  width: 100%;
+  ${Label} {
+    margin-bottom: 4px;
+  }
+
+  & + & {
+    margin-top: 12px;
+  }
+`;
+
+type DropdownBaseProps<T> = CommonSelectType<T> & {
+  placeholder?: string;
+};
+const DropdownBase = <T extends string>({ options, selected, onSelected, placeholder }: DropdownBaseProps<T>) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const selectedOption = useMemo(() => options.find((option) => option.value === selected), [options, selected]);
 
   const [isOpen, setIsOpen] = useState(false);
   const handleSelect = (value: T) => {
@@ -15,9 +48,9 @@ const Dropdown = <T extends string>({ options, selected, onSelected }: CommonSel
 
   useOutAreaClick(dropdownRef, () => setIsOpen(false));
   return (
-    <DropdownWrapper ref={dropdownRef}>
+    <DropdownBaseWrapper ref={dropdownRef}>
       <DropdownButton onClick={() => setIsOpen(!isOpen)}>
-        {selected}
+        {selectedOption?.label || placeholder || '선택해주세요'}
         <DropdownIcon $isOpen={isOpen}>
           <SvgChevronDown width="24px" height="24px" fill="#000" />
         </DropdownIcon>
@@ -31,7 +64,7 @@ const Dropdown = <T extends string>({ options, selected, onSelected }: CommonSel
           ))}
         </DropdownList>
       )}
-    </DropdownWrapper>
+    </DropdownBaseWrapper>
   );
 };
 const DropdownItem = styled.li`
@@ -78,7 +111,7 @@ const DropdownButton = styled.button`
   color: ${({ theme }) => theme.colors.black};
   font-size: 16px;
 `;
-const DropdownWrapper = styled.div`
+const DropdownBaseWrapper = styled.div`
   position: relative;
 `;
 

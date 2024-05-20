@@ -4,6 +4,6 @@ export type SelectItem<T = string> = {
 };
 export type CommonSelectType<T> = {
   options: SelectItem<T>[];
-  selected: T;
+  selected: T | null;
   onSelected: (value: T) => void;
 };

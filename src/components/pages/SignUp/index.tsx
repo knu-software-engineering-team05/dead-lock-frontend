@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import { Input } from '../../common/Input';
 import { BackButton, Button } from '../../common/Button';
-import { SelectorWithLabel } from '../../common/Selector';
+import { Selector } from '../../common/Selector';
 import { CommonWrapper } from '../../common/Wrapper';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../../router';
@@ -70,7 +70,7 @@ const SignUp: React.FC = () => {
             value={birthDate}
             onChange={(e) => setBirthDate(e.target.value)}
           />
-          <SelectorWithLabel label="성별" options={SEX_OPTIONS} selected={sex} onSelected={setSex} />
+          <Selector label="성별" options={SEX_OPTIONS} selected={sex} onSelected={setSex} />
         </InputSection>
         <Button.Contained onClick={handleSingUp}>가입하기</Button.Contained>
       </ContentWrapper>

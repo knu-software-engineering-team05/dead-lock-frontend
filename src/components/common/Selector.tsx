@@ -2,8 +2,30 @@ import styled from 'styled-components';
 import { Label } from './Label';
 import { CommonSelectType } from '../../types/select';
 
-const Selector = <T,>({ options, selected, onSelected }: CommonSelectType<T>) => (
-  <SelectorWrapper>
+type SelectorProps<T> = CommonSelectType<T> & {
+  label?: string;
+};
+const Selector = <T,>({ label, ...selectorProps }: SelectorProps<T>) => {
+  if (!label) {
+    return <SelectorBase {...selectorProps} />;
+  }
+
+  return (
+    <SelectorWrapper>
+      <Label>{label}</Label>
+      <SelectorBase {...selectorProps} />
+    </SelectorWrapper>
+  );
+};
+const SelectorWrapper = styled.div`
+  width: 100%;
+  ${Label} {
+    margin-bottom: 4px;
+  }
+`;
+
+const SelectorBase = <T,>({ options, selected, onSelected }: CommonSelectType<T>) => (
+  <SelectorBaseWrapper>
     {options.map((option) => (
       <SelectorItem
         key={option.label}
@@ -14,7 +36,7 @@ const Selector = <T,>({ options, selected, onSelected }: CommonSelectType<T>) =>
         {option.label}
       </SelectorItem>
     ))}
-  </SelectorWrapper>
+  </SelectorBaseWrapper>
 );
 const SelectorItem = styled.button<{ $selected: boolean; $widthPercent: string }>`
   width: ${({ $widthPercent }) => $widthPercent};
@@ -26,7 +48,7 @@ const SelectorItem = styled.button<{ $selected: boolean; $widthPercent: string }
   cursor: pointer;
   border: none;
 `;
-const SelectorWrapper = styled.div`
+const SelectorBaseWrapper = styled.div`
   display: flex;
   align-items: center;
   border-radius: 30px;
@@ -36,17 +58,4 @@ const SelectorWrapper = styled.div`
   padding: 4px;
 `;
 
-const SelectorWithLabel = <T,>({ label, ...restProps }: CommonSelectType<T> & { label: string }) => (
-  <SelectorWithLabelWrapper>
-    <Label>{label}</Label>
-    <Selector {...restProps} />
-  </SelectorWithLabelWrapper>
-);
-const SelectorWithLabelWrapper = styled.div`
-  width: 100%;
-  ${Label} {
-    margin-bottom: 4px;
-  }
-`;
-
-export { Selector, SelectorWithLabel };
+export { Selector, SelectorBase };
