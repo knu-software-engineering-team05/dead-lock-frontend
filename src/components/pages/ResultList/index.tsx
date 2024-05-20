@@ -20,7 +20,7 @@ const ResultList: React.FC = () => {
 
       <ContentSection>
         {results.length === 0 && (
-          <EmptyResultItem>
+          <EmptyResultItem onClick={() => navigate(PATHS.TEST)}>
             <SvgTextWrapper className="empty">
               <SvgPlus width="24px" height="24px" fill={theme.colors.primary} />
               <CommonResultItemText>진단하기</CommonResultItemText>
@@ -50,7 +50,7 @@ const ResultList: React.FC = () => {
           ))}
       </ContentSection>
 
-      <Button.Contained onClick={() => navigate(PATHS.SIGN_IN)}>진단하기</Button.Contained>
+      <Button.Contained onClick={() => navigate(PATHS.TEST)}>진단하기</Button.Contained>
     </ResultListWrapper>
   );
 };

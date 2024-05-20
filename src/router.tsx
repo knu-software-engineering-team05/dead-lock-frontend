@@ -4,6 +4,7 @@ import App from './App';
 import Main from './components/pages/Main';
 import SignUp from './components/pages/SignUp';
 import SignIn from './components/pages/SignIn';
+import Test from './components/pages/Test';
 import ResultList from './components/pages/ResultList';
 import ResultDetail from './components/pages/ResultDetail';
 import HelpfulPrograms from './components/pages/HelpfulPrograms';
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: PATHS.TEST,
-        element: <div>test</div>,
+        element: <Test />,
       },
     ],
   },
