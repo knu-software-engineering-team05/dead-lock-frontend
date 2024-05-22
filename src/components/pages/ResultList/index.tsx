@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../../common/Button';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../../router';
@@ -12,8 +12,16 @@ import { createPathWithParams } from '../../../utils/createPathWithParams';
 const ResultList: React.FC = () => {
   const navigate = useNavigate();
 
-  const [results, setResults] = useState<MockResultType[]>(MOCK_RESULTS);
+  const [results, setResults] = useState<MockResultType[]>([]);
 
+  const handleLoadResults = async () => {
+    // API 호출로 대체
+    setResults(MOCK_RESULTS);
+  };
+
+  useEffect(() => {
+    handleLoadResults();
+  }, []);
   return (
     <ResultListWrapper>
       <Title>내 진단 결과</Title>

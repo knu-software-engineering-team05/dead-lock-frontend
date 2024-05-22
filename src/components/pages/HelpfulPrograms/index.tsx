@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../../common/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PATHS } from '../../../router';
@@ -11,8 +11,21 @@ const HelpfulPrograms: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [result, setResult] = useState<MockResultType>(MOCK_RESULTS[0]);
+  const [result, setResult] = useState<MockResultType | null>(null);
 
+  const handleLoadResultDetail = async () => {
+    // API 호출로 대체
+    setResult(MOCK_RESULTS.find((result) => result.id.toString() === id) || MOCK_RESULTS[0]);
+  };
+
+  useEffect(() => {
+    handleLoadResultDetail();
+  }, []);
+
+  // result가 없을 경우 렌더링 하지 않음
+  if (!result) {
+    return null;
+  }
   return (
     <HelpfulProgramsWrapper>
       <Title>생활습관 개선 프로그램</Title>
