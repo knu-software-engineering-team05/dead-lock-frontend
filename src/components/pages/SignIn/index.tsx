@@ -5,6 +5,7 @@ import { BackButton, Button } from '../../common/Button';
 import { CommonWrapper } from '../../common/Wrapper';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../../router';
+import { postSignIn } from '../../../service/auth';
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
@@ -12,8 +13,19 @@ const SignIn: React.FC = () => {
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  // TODO: 로그인 요청
   const handleSingIn = async () => {
+    if (!id || !password) {
+      alert('아이디와 비밀번호를 입력해주세요');
+      return;
+    }
+
+    const { data } = await postSignIn({
+      userId: id,
+      userPw: password,
+    });
+    localStorage.setItem('token', data.access);
+    localStorage.setItem('refresh', data.refresh);
+
     navigate(PATHS.RESULT_LIST);
   };
 

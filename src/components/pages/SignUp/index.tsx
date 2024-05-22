@@ -6,14 +6,12 @@ import { Selector } from '../../common/Selector';
 import { CommonWrapper } from '../../common/Wrapper';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../../../router';
+import { GENDER, Gender } from '../../../types/service';
+import { postSignUp } from '../../../service/auth';
 
-const SEX = {
-  MAN: 'MAN',
-  WOMAN: 'WOMAN',
-} as const;
-const SEX_OPTIONS = [
-  { value: SEX.MAN, label: '남성' },
-  { value: SEX.WOMAN, label: '여성' },
+const GENDER_OPTIONS = [
+  { value: GENDER.MALE, label: '남성' },
+  { value: GENDER.FEMALE, label: '여성' },
 ];
 
 const SignUp: React.FC = () => {
@@ -23,12 +21,29 @@ const SignUp: React.FC = () => {
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-  const [birthDate, setBirthDate] = useState<string>('');
-  const [sex, setSex] = useState<keyof typeof SEX>(SEX.MAN);
+  const [birth, setBirth] = useState<string>('');
+  const [gender, setGender] = useState<Gender>(GENDER.MALE);
 
-  // TODO: 회원가입 요청 + 로그인 페이지로 이동
   const handleSingUp = async () => {
-    navigate(PATHS.SIGN_IN, { replace: true });
+    if (!name || !id || !password || !passwordConfirm || !birth) {
+      alert('모든 항목을 입력해주세요');
+      return;
+    }
+    if (password !== passwordConfirm) {
+      alert('비밀번호가 일치하지 않습니다');
+      return;
+    }
+
+    const { data } = await postSignUp({
+      userId: id,
+      userPw: password,
+      birth,
+      gender,
+    });
+    localStorage.setItem('token', data.access);
+    localStorage.setItem('refresh', data.refresh);
+
+    navigate(PATHS.RESULT_LIST);
   };
 
   return (
@@ -67,10 +82,10 @@ const SignUp: React.FC = () => {
           <Input
             label="생년월일"
             placeholder="생년월일 8자리를 입력해 주세요 (YYYYMMDD)"
-            value={birthDate}
-            onChange={(e) => setBirthDate(e.target.value)}
+            value={birth}
+            onChange={(e) => setBirth(e.target.value)}
           />
-          <Selector label="성별" options={SEX_OPTIONS} selected={sex} onSelected={setSex} />
+          <Selector label="성별" options={GENDER_OPTIONS} selected={gender} onSelected={setGender} />
         </InputSection>
         <Button.Contained onClick={handleSingUp}>가입하기</Button.Contained>
       </ContentWrapper>
