@@ -55,7 +55,8 @@ const HealthInfoStep: React.FC = () => {
       bmi: Number(bmi),
       smokeType,
     };
-    const { data } = await postDiagnosis(testRequestData);
+    // const { data } = await postDiagnosis(testRequestData);
+    const data = { id: 1 };
 
     setIsLoading(false);
 

@@ -19,12 +19,12 @@ const SignIn: React.FC = () => {
       return;
     }
 
-    const { data } = await postSignIn({
-      userId: id,
-      userPw: password,
-    });
-    localStorage.setItem('token', data.access);
-    localStorage.setItem('refresh', data.refresh);
+    // const { data } = await postSignIn({
+    //   userId: id,
+    //   userPw: password,
+    // });
+    // localStorage.setItem('token', data.access);
+    // localStorage.setItem('refresh', data.refresh);
 
     navigate(PATHS.RESULT_LIST);
   };

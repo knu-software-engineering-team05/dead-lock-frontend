@@ -9,6 +9,7 @@ import Basic from './type/Basic';
 import { DiagnosisResponse } from '../../../types/service';
 import Helpful from './type/Helpful';
 import { getDiagnosisItem } from '../../../service/diagnosis';
+import { MOCK_RESULTS } from '../../../mock';
 
 const ResultDetail: React.FC = () => {
   const { id } = useParams();
@@ -22,8 +23,8 @@ const ResultDetail: React.FC = () => {
       return;
     }
 
-    const { data } = await getDiagnosisItem(id);
-    setDiagnosisResult(data);
+    // const { data } = await getDiagnosisItem(id);
+    setDiagnosisResult(MOCK_RESULTS.find((diagnosisResult) => diagnosisResult.id.toString() === id) || MOCK_RESULTS[0]);
   };
 
   useEffect(() => {

@@ -11,6 +11,7 @@ import { DiagnosisResponse } from '../../../types/service';
 import { RESULT_DETAIL_SEARCH_PARAMS } from '../../../constants/searchParams';
 import { getDateSet } from '../../../utils/getDate';
 import { getDiagnosisList } from '../../../service/diagnosis';
+import { MOCK_RESULTS } from '../../../mock';
 
 const ResultList: React.FC = () => {
   const navigate = useNavigate();
@@ -18,8 +19,8 @@ const ResultList: React.FC = () => {
   const [results, setResults] = useState<DiagnosisResponse[]>([]);
 
   const handleLoadResults = async () => {
-    const { data } = await getDiagnosisList();
-    setResults(data);
+    // const { data } = await getDiagnosisList();
+    setResults(MOCK_RESULTS);
   };
 
   useEffect(() => {

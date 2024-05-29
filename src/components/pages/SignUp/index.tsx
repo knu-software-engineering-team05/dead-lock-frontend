@@ -34,14 +34,14 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    const { data } = await postSignUp({
-      userId: id,
-      userPw: password,
-      birth,
-      gender,
-    });
-    localStorage.setItem('token', data.access);
-    localStorage.setItem('refresh', data.refresh);
+    // const { data } = await postSignUp({
+    //   userId: id,
+    //   userPw: password,
+    //   birth,
+    //   gender,
+    // });
+    // localStorage.setItem('token', data.access);
+    // localStorage.setItem('refresh', data.refresh);
 
     navigate(PATHS.RESULT_LIST);
   };
