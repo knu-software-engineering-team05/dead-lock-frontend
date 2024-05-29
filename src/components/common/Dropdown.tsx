@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { SvgChevronDown } from '../../svgs';
 import { CommonSelectType } from '../../types/select';
 import useOutAreaClick from '../../utils/useOutAreaClick';
@@ -49,7 +49,7 @@ const DropdownBase = <T extends string>({ options, selected, onSelected, placeho
   useOutAreaClick(dropdownRef, () => setIsOpen(false));
   return (
     <DropdownBaseWrapper ref={dropdownRef}>
-      <DropdownButton onClick={() => setIsOpen(!isOpen)}>
+      <DropdownButton onClick={() => setIsOpen(!isOpen)} $isSelected={!!selected}>
         {selectedOption?.label || placeholder || '선택해주세요'}
         <DropdownIcon $isOpen={isOpen}>
           <SvgChevronDown width="24px" height="24px" fill="#000" />
@@ -97,7 +97,7 @@ const DropdownList = styled.ul`
 const DropdownIcon = styled.span<{ $isOpen: boolean }>`
   transform: ${({ $isOpen }) => ($isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
 `;
-const DropdownButton = styled.button`
+const DropdownButton = styled.button<{ $isSelected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -110,6 +110,12 @@ const DropdownButton = styled.button`
   cursor: pointer;
   color: ${({ theme }) => theme.colors.black};
   font-size: 16px;
+
+  ${({ $isSelected }) =>
+    !$isSelected &&
+    css`
+      color: ${({ theme }) => theme.colors.gray};
+    `}
 `;
 const DropdownBaseWrapper = styled.div`
   position: relative;
