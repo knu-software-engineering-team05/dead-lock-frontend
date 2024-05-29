@@ -21,3 +21,38 @@ export interface TokenResponse {
   access: string;
   refresh: string;
 }
+
+export const RESIDENCE_TYPE = {
+  URBAN: 'URBAN',
+  RURAL: 'RURAL',
+} as const;
+export type ResidenceType = keyof typeof RESIDENCE_TYPE;
+
+export const JOB_TYPE = {
+  PRIVATE: 'PRIVATE',
+  SELF_EMPLOYED: 'SELF_EMPLOYED',
+  GOVT_JOB: 'GOVT_JOB',
+  CHILDREN: 'CHILDREN',
+  NEVER_WORKED: 'NEVER_WORKED',
+} as const;
+export type JobType = keyof typeof JOB_TYPE;
+
+export const SMOKING_TYPE = {
+  FORMERLY: 'FORMERLY',
+  NEVER: 'NEVER',
+  SMOKES: 'SMOKES',
+  UNKNOWN: 'UNKNOWN',
+} as const;
+export type SmokingType = keyof typeof SMOKING_TYPE;
+
+export interface TestRequest {
+  residenceType: ResidenceType;
+  jobType: JobType;
+  married: boolean;
+
+  highBloodPressure: boolean;
+  heartDisease: boolean;
+  bloodSugarLevel: number;
+  bmi: number;
+  smokingType: SmokingType;
+}
