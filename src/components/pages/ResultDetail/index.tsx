@@ -4,11 +4,11 @@ import { Button } from '../../common/Button';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { PATHS } from '../../../router';
 import { CommonWrapper } from '../../common/Wrapper';
-import { MOCK_RESULTS } from '../../../mock';
 import { RESULT_DETAIL_SEARCH_PARAMS } from '../../../constants/searchParams';
 import Basic from './type/Basic';
 import { DiagnosisResponse } from '../../../types/service';
 import Helpful from './type/Helpful';
+import { getDiagnosisItem } from '../../../service/diagnosis';
 
 const ResultDetail: React.FC = () => {
   const { id } = useParams();
@@ -18,8 +18,12 @@ const ResultDetail: React.FC = () => {
   const [diagnosisResult, setDiagnosisResult] = useState<DiagnosisResponse | null>(null);
 
   const handleLoadResultDetail = async () => {
-    // API 호출로 대체
-    setDiagnosisResult(MOCK_RESULTS.find((diagnosisResult) => diagnosisResult.id.toString() === id) || MOCK_RESULTS[0]);
+    if (!id) {
+      return;
+    }
+
+    const { data } = await getDiagnosisItem(id);
+    setDiagnosisResult(data);
   };
 
   useEffect(() => {
