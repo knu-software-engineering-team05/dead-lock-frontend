@@ -40,7 +40,7 @@ const ResultList: React.FC = () => {
         )}
         {results.length > 0 &&
           results.map((result) => {
-            const { date, time } = getDateSet(new Date(result.createdAt));
+            const { date, time } = getDateSet(result.createdAt);
 
             return (
               <ResultItem
