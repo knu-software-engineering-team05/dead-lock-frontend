@@ -7,7 +7,10 @@ import { useTestStore, TEST_STEP } from '../../../store/testStore';
 import { Dropdown } from '../../common/Dropdown';
 import { Input } from '../../common/Input';
 import { COMMON_OPTIONS, SMOKING_TYPE_OPTIONS } from '../../../constants/selectOption';
-import { TestRequest } from '../../../types/service';
+import { DiagnosisRequest } from '../../../types/service';
+import { postDiagnosis } from '../../../service/diagnosis';
+import { createPathWithParams } from '../../../utils/createPathWithParams';
+import { RESULT_DETAIL_SEARCH_PARAMS } from '../../../constants/searchParams';
 
 const HealthInfoStep: React.FC = () => {
   const navigate = useNavigate();
@@ -30,14 +33,14 @@ const HealthInfoStep: React.FC = () => {
     setSmokingType,
   } = useTestStore();
 
-  // TODO: 건강정보 입력 요청
   const handleConfirm = async () => {
     if (!highBloodPressure || !heartDisease || !bloodSugarLevel || !bmi || !smokingType) {
       alert('모든 항목을 입력해주세요');
       return;
     }
 
-    const testRequestData: TestRequest = {
+    // 이전 & 현재 step에서 null 체크를 하기 때문에 !를 붙여 타입을 강제해도 무방
+    const testRequestData: DiagnosisRequest = {
       residenceType: residenceType!,
       jobType: jobType!,
       married: married === 'YES',
@@ -47,10 +50,10 @@ const HealthInfoStep: React.FC = () => {
       bmi: Number(bmi),
       smokingType,
     };
+    const { data } = await postDiagnosis(testRequestData);
+    alert('진단이 완료되었습니다');
 
-    console.log(testRequestData);
-
-    // navigate(PATHS.RESULT_LIST);
+    navigate(createPathWithParams(PATHS.RESULT_DETAIL, { id: data.id }) + `?type=${RESULT_DETAIL_SEARCH_PARAMS.BASIC}`);
   };
 
   return (

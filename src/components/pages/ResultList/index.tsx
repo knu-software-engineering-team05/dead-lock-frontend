@@ -6,11 +6,11 @@ import { PATHS } from '../../../router';
 import { CommonWrapper } from '../../common/Wrapper';
 import { SvgPlus, SvgStethoscope } from '../../../svgs';
 import { theme } from '../../../theme';
-import { MOCK_RESULTS } from '../../../mock';
 import { createPathWithParams } from '../../../utils/createPathWithParams';
 import { DiagnosisResponse } from '../../../types/service';
 import { RESULT_DETAIL_SEARCH_PARAMS } from '../../../constants/searchParams';
 import { getDateSet } from '../../../utils/getDate';
+import { getDiagnosisList } from '../../../service/diagnosis';
 
 const ResultList: React.FC = () => {
   const navigate = useNavigate();
@@ -18,8 +18,8 @@ const ResultList: React.FC = () => {
   const [results, setResults] = useState<DiagnosisResponse[]>([]);
 
   const handleLoadResults = async () => {
-    // API 호출로 대체
-    setResults(MOCK_RESULTS);
+    const { data } = await getDiagnosisList();
+    setResults(data);
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const ResultList: React.FC = () => {
         )}
         {results.length > 0 &&
           results.map((result) => {
-            const { date, time } = getDateSet(new Date(result.createdAt));
+            const { date, time } = getDateSet(result.createdAt);
 
             return (
               <ResultItem
