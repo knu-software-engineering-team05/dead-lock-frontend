@@ -45,7 +45,7 @@ export const SMOKING_TYPE = {
 } as const;
 export type SmokingType = keyof typeof SMOKING_TYPE;
 
-export interface TestRequest {
+export interface DiagnosisRequest {
   residenceType: ResidenceType;
   jobType: JobType;
   married: boolean;
@@ -55,4 +55,15 @@ export interface TestRequest {
   bloodSugarLevel: number;
   bmi: number;
   smokingType: SmokingType;
+}
+
+export interface DiagnosisResponse {
+  id: string;
+  createdAt: string;
+
+  score: number;
+  strokeProbability: number;
+  totalDiagnosis: string;
+  eatingHabits: string;
+  lifestyleHabits: string;
 }

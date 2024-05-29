@@ -7,7 +7,6 @@ import SignIn from './components/pages/SignIn';
 import Test from './components/pages/Test';
 import ResultList from './components/pages/ResultList';
 import ResultDetail from './components/pages/ResultDetail';
-import HelpfulPrograms from './components/pages/HelpfulPrograms';
 
 export const PATHS = {
   MAIN: '/',
@@ -15,7 +14,6 @@ export const PATHS = {
   SIGN_UP: '/signup',
   RESULT_LIST: '/results',
   RESULT_DETAIL: '/results/:id',
-  HELPFUL_PROGRAMS: '/results/:id/programs',
   TEST: '/test',
 } as const;
 
@@ -43,10 +41,6 @@ const router = createBrowserRouter([
       {
         path: PATHS.RESULT_DETAIL,
         element: <ResultDetail />,
-      },
-      {
-        path: PATHS.HELPFUL_PROGRAMS,
-        element: <HelpfulPrograms />,
       },
       {
         path: PATHS.TEST,

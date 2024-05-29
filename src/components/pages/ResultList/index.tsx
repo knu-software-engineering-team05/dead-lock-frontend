@@ -6,13 +6,16 @@ import { PATHS } from '../../../router';
 import { CommonWrapper } from '../../common/Wrapper';
 import { SvgPlus, SvgStethoscope } from '../../../svgs';
 import { theme } from '../../../theme';
-import { MOCK_RESULTS, MockResultType } from '../../../mock';
+import { MOCK_RESULTS } from '../../../mock';
 import { createPathWithParams } from '../../../utils/createPathWithParams';
+import { DiagnosisResponse } from '../../../types/service';
+import { RESULT_DETAIL_SEARCH_PARAMS } from '../../../constants/searchParams';
+import { getDateSet } from '../../../utils/getDate';
 
 const ResultList: React.FC = () => {
   const navigate = useNavigate();
 
-  const [results, setResults] = useState<MockResultType[]>([]);
+  const [results, setResults] = useState<DiagnosisResponse[]>([]);
 
   const handleLoadResults = async () => {
     // API 호출로 대체
@@ -36,26 +39,35 @@ const ResultList: React.FC = () => {
           </EmptyResultItem>
         )}
         {results.length > 0 &&
-          results.map((result) => (
-            <ResultItem
-              key={result.id}
-              onClick={() => navigate(createPathWithParams(PATHS.RESULT_DETAIL, { id: result.id }))}
-            >
-              <SvgTextWrapper>
-                <SvgStethoscope width="24px" height="24px" fill={theme.colors.primary} />
-                <CommonResultItemText>
-                  {result.date}
-                  <br />
-                  {result.time}
-                </CommonResultItemText>
-              </SvgTextWrapper>
+          results.map((result) => {
+            const { date, time } = getDateSet(new Date(result.createdAt));
 
-              <ResultItemRight>
-                <ScoreText>{result.score}</ScoreText>
-                <CommonResultItemText className="score-label">점</CommonResultItemText>
-              </ResultItemRight>
-            </ResultItem>
-          ))}
+            return (
+              <ResultItem
+                key={result.id}
+                onClick={() =>
+                  navigate(
+                    createPathWithParams(PATHS.RESULT_DETAIL, { id: result.id }) +
+                      `?type=${RESULT_DETAIL_SEARCH_PARAMS.BASIC}`
+                  )
+                }
+              >
+                <SvgTextWrapper>
+                  <SvgStethoscope width="24px" height="24px" fill={theme.colors.primary} />
+                  <CommonResultItemText>
+                    {date}
+                    <br />
+                    {time}
+                  </CommonResultItemText>
+                </SvgTextWrapper>
+
+                <ResultItemRight>
+                  <ScoreText>{result.score}</ScoreText>
+                  <CommonResultItemText className="score-label">점</CommonResultItemText>
+                </ResultItemRight>
+              </ResultItem>
+            );
+          })}
       </ContentSection>
 
       <Button.Contained onClick={() => navigate(PATHS.TEST)}>진단하기</Button.Contained>
