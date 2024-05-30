@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ResidenceType, SmokingType, JobType } from '../types/service';
+import { ResidenceType, SmokeType, JobType } from '../types/service';
 import { CommonOption } from '../constants/selectOption';
 
 export const TEST_STEP = {
@@ -19,7 +19,7 @@ type State = {
   heartDisease: CommonOption | null;
   bloodSugarLevel: string;
   bmi: string;
-  smokingType: SmokingType | null;
+  smokeType: SmokeType | null;
 };
 type Action = {
   setStep: (currentStep: TestStepType) => void;
@@ -32,7 +32,7 @@ type Action = {
   setHeartDisease: (heartDisease: CommonOption) => void;
   setBloodSugarLevel: (bloodSugarLevel: string) => void;
   setBmi: (bmi: string) => void;
-  setSmokingType: (smokingType: SmokingType) => void;
+  setSmokeType: (smokeType: SmokeType) => void;
 
   clearStore: () => void;
 };
@@ -48,7 +48,7 @@ const DEFAULT_STATE: State = {
   heartDisease: null,
   bloodSugarLevel: '',
   bmi: '',
-  smokingType: null,
+  smokeType: null,
 } as const;
 
 const useTestStore = create<State & Action>((set) => ({
@@ -64,7 +64,7 @@ const useTestStore = create<State & Action>((set) => ({
   setHeartDisease: (heartDisease) => set(() => ({ heartDisease })),
   setBloodSugarLevel: (bloodSugarLevel) => set(() => ({ bloodSugarLevel })),
   setBmi: (bmi) => set(() => ({ bmi })),
-  setSmokingType: (smokingType) => set(() => ({ smokingType })),
+  setSmokeType: (smokeType) => set(() => ({ smokeType })),
 
   clearStore: () => set(() => DEFAULT_STATE),
 }));

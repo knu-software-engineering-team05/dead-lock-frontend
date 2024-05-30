@@ -37,13 +37,13 @@ export const JOB_TYPE = {
 } as const;
 export type JobType = keyof typeof JOB_TYPE;
 
-export const SMOKING_TYPE = {
+export const SMOKE_TYPE = {
   FORMERLY: 'FORMERLY',
   NEVER: 'NEVER',
   SMOKES: 'SMOKES',
   UNKNOWN: 'UNKNOWN',
 } as const;
-export type SmokingType = keyof typeof SMOKING_TYPE;
+export type SmokeType = keyof typeof SMOKE_TYPE;
 
 export interface DiagnosisRequest {
   residenceType: ResidenceType;
@@ -54,7 +54,7 @@ export interface DiagnosisRequest {
   heartDisease: boolean;
   bloodSugarLevel: number;
   bmi: number;
-  smokingType: SmokingType;
+  smokeType: SmokeType;
 }
 
 export interface DiagnosisResponse {

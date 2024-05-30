@@ -6,7 +6,7 @@ import { PATHS } from '../../../router';
 import { useTestStore, TEST_STEP } from '../../../store/testStore';
 import { Dropdown } from '../../common/Dropdown';
 import { Input } from '../../common/Input';
-import { COMMON_OPTIONS, SMOKING_TYPE_OPTIONS } from '../../../constants/selectOption';
+import { COMMON_OPTIONS, SMOKE_TYPE_OPTIONS } from '../../../constants/selectOption';
 import { DiagnosisRequest } from '../../../types/service';
 import { postDiagnosis } from '../../../service/diagnosis';
 import { createPathWithParams } from '../../../utils/createPathWithParams';
@@ -25,16 +25,16 @@ const HealthInfoStep: React.FC = () => {
     heartDisease,
     bloodSugarLevel,
     bmi,
-    smokingType,
+    smokeType,
     setHighBloodPressure,
     setHeartDisease,
     setBloodSugarLevel,
     setBmi,
-    setSmokingType,
+    setSmokeType,
   } = useTestStore();
 
   const handleConfirm = async () => {
-    if (!highBloodPressure || !heartDisease || !bloodSugarLevel || !bmi || !smokingType) {
+    if (!highBloodPressure || !heartDisease || !bloodSugarLevel || !bmi || !smokeType) {
       alert('모든 항목을 입력해주세요');
       return;
     }
@@ -48,7 +48,7 @@ const HealthInfoStep: React.FC = () => {
       heartDisease: heartDisease === 'YES',
       bloodSugarLevel: Number(bloodSugarLevel),
       bmi: Number(bmi),
-      smokingType,
+      smokeType,
     };
     const { data } = await postDiagnosis(testRequestData);
     alert('진단이 완료되었습니다');
@@ -89,9 +89,9 @@ const HealthInfoStep: React.FC = () => {
         <Dropdown
           label="흡연 여부"
           placeholder="흡연 여부를 선택해 주세요"
-          options={SMOKING_TYPE_OPTIONS}
-          selected={smokingType}
-          onSelected={setSmokingType}
+          options={SMOKE_TYPE_OPTIONS}
+          selected={smokeType}
+          onSelected={setSmokeType}
         />
       </InputSection>
       <FooterSection>

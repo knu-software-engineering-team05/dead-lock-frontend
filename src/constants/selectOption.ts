@@ -1,4 +1,4 @@
-import { RESIDENCE_TYPE, SMOKING_TYPE, JOB_TYPE } from '../types/service';
+import { RESIDENCE_TYPE, SMOKE_TYPE, JOB_TYPE } from '../types/service';
 
 const COMMON_OPTION = {
   YES: 'YES',
@@ -23,9 +23,9 @@ export const JOB_TYPE_OPTIONS = [
   { value: JOB_TYPE.NEVER_WORKED, label: '일한적 없음' },
 ];
 
-export const SMOKING_TYPE_OPTIONS = [
-  { value: SMOKING_TYPE.FORMERLY, label: '과거에 흡연함' },
-  { value: SMOKING_TYPE.NEVER, label: '흡연하지 않음' },
-  { value: SMOKING_TYPE.SMOKES, label: '흡연함' },
-  { value: SMOKING_TYPE.UNKNOWN, label: '알 수 없음' },
+export const SMOKE_TYPE_OPTIONS = [
+  { value: SMOKE_TYPE.FORMERLY, label: '과거에 흡연함' },
+  { value: SMOKE_TYPE.NEVER, label: '흡연하지 않음' },
+  { value: SMOKE_TYPE.SMOKES, label: '흡연함' },
+  { value: SMOKE_TYPE.UNKNOWN, label: '알 수 없음' },
 ];
