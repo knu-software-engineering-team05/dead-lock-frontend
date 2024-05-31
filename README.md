@@ -6,6 +6,10 @@
 
 ---
 
+## Preview (TBD)
+
+---
+
 ## Usage
 
 1. Git Clone
@@ -45,8 +49,18 @@ $ npm run build
 ```
 
 ---
+## Simple Project Structure
+- `/src/components/pages/*`: 각 Page들을 구성하는 파일들
+- `/src/routers.tsx`: 각 Page파일들을 routing 해주는 파일
+- `/src/theme/*`, `/src/components/common/*`: 디자인 관련 파일들 (GlobalStyle, Reusing Components)
+- `/src/service/*`, `/src/types/service.ts`, `/src/mock/*`: 서버 통신과 관련한 파일들 & Mock Data
+- `/src/store/testStore.ts`: 뇌졸중 검사 시 도출되는 Data State를 모아두는 state management (Store)
+- `/src/utils/*`: front에서 필요한 custom utils
 
-## Used Tech Stack List (TBD)
+--- 
+## Used Tech Stack List
 - React.js(v18) & TypeScript(v5)
-- styled-components
-- ...
+- styled-components (Styling)
+- axios (API)
+- zustand (State Management)
+
