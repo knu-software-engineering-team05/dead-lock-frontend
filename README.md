@@ -6,10 +6,16 @@
 
 ---
 
-## Preview (TBD)
+## Preview
+### UI
+![deadlock_basic](https://github.com/knu-software-engineering-team05/dead-lock-frontend/assets/55488800/cf620495-8229-442a-8dae-3131eac10241)
+![deadlock_main](https://github.com/knu-software-engineering-team05/dead-lock-frontend/assets/55488800/4f0be401-d0eb-4957-bf98-99914e7df9aa)
+
+### Example Using GIF
+<img src='https://github.com/knu-software-engineering-team05/dead-lock-frontend/assets/55488800/1e4e2385-b449-4e8a-b1cc-ffdc4bde7d41' alt='deadlock_example_using' width='200px' />
+
 
 ---
-
 ## Usage
 
 1. Git Clone
@@ -38,7 +44,7 @@ $ yarn start
 $ npm run start
 ```
 
-4. Build & Deploy (TBD)
+4. Build
 
 ```cmd
 $ yarn build
@@ -47,6 +53,18 @@ $ yarn build
 
 $ npm run build
 ```
+---
+
+## Path
+
+- `/`: 메인 페이지
+- `/signin`: 로그인 페이지
+- `/signup`: 회원가입 페이지
+- `/test`: 뇌졸중 검사 페이지
+- `/results`: 이전에 진행했던 뇌졸중 검사 결과 리스트 페이지
+- `/results/:id`: 뇌졸중 검사 결과 상세 페이지
+  - `?type=basic`: 종합진단결과
+  - `?type=helpful`: 생활습관 개선 프로그램
 
 ---
 ## Simple Project Structure
