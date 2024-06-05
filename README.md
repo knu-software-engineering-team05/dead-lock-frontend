@@ -62,7 +62,7 @@ $ npm run build
 - `/signup`: 회원가입 페이지
 - `/test`: 뇌졸중 검사 페이지
 - `/results`: 이전에 진행했던 뇌졸중 검사 결과 리스트 페이지
-- `/results/:id`: 뇌졸중 검사 결과 상세 페이지
+- `/results/:id`: 뇌졸중 검사 결과 상세 페이지
   - `?type=basic`: 종합진단결과
   - `?type=helpful`: 생활습관 개선 프로그램
 
