@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FooterSection, InputSection, SectionTitle } from './styled';
 import { Button } from '../../common/Button';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { DiagnosisRequest } from '../../../types/service';
 import { postDiagnosis } from '../../../service/diagnosis';
 import { createPathWithParams } from '../../../utils/createPathWithParams';
 import { RESULT_DETAIL_SEARCH_PARAMS } from '../../../constants/searchParams';
+import { GlobalLoading } from '../../common/Loading';
 
 const HealthInfoStep: React.FC = () => {
   const navigate = useNavigate();
@@ -33,11 +34,15 @@ const HealthInfoStep: React.FC = () => {
     setSmokeType,
   } = useTestStore();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleConfirm = async () => {
     if (!highBloodPressure || !heartDisease || !bloodSugarLevel || !bmi || !smokeType) {
       alert('모든 항목을 입력해주세요');
       return;
     }
+
+    setIsLoading(true);
 
     // 이전 & 현재 step에서 null 체크를 하기 때문에 !를 붙여 타입을 강제해도 무방
     const testRequestData: DiagnosisRequest = {
@@ -51,6 +56,9 @@ const HealthInfoStep: React.FC = () => {
       smokeType,
     };
     const { data } = await postDiagnosis(testRequestData);
+
+    setIsLoading(false);
+
     alert('진단이 완료되었습니다');
 
     navigate(createPathWithParams(PATHS.RESULT_DETAIL, { id: data.id }) + `?type=${RESULT_DETAIL_SEARCH_PARAMS.BASIC}`);
@@ -98,6 +106,7 @@ const HealthInfoStep: React.FC = () => {
         <Button.Outlined onClick={() => setStep(TEST_STEP.BASIC_INFO_STEP)}>이전</Button.Outlined>
         <Button.Contained onClick={handleConfirm}>완료</Button.Contained>
       </FooterSection>
+      {isLoading && <GlobalLoading />}
     </>
   );
 };
