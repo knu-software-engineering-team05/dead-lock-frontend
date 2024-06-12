@@ -1,4 +1,4 @@
-FROM node:21-slim
+FROM --platform=amd64 node:21-slim
 
 WORKDIR /app
 
@@ -10,6 +10,8 @@ RUN yarn
 RUN yarn global add serve
 
 COPY . .
+
+EXPOSE 3000
 
 RUN yarn build
 
