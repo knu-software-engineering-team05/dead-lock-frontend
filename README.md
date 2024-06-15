@@ -1,46 +1,84 @@
-# Getting Started with Create React App
+# [소프트웨어공학] DeadLock
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About
 
-## Available Scripts
+> 해당 프로젝트는 소프트웨어 공학 수업에서 진행 중이며, `뇌졸중 위험 예방 및 관리 시스템`의 Frontend Repo 입니다.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Preview
+### UI
+![deadlock_basic](https://github.com/knu-software-engineering-team05/dead-lock-frontend/assets/55488800/cf620495-8229-442a-8dae-3131eac10241)
+![deadlock_main](https://github.com/knu-software-engineering-team05/dead-lock-frontend/assets/55488800/4f0be401-d0eb-4957-bf98-99914e7df9aa)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Example Using GIF
+<img src='https://github.com/knu-software-engineering-team05/dead-lock-frontend/assets/55488800/1e4e2385-b449-4e8a-b1cc-ffdc4bde7d41' alt='deadlock_example_using' width='200px' />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+---
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Git Clone
 
-### `npm run build`
+```cmd
+$ git clone https://github.com/knu-software-engineering-team05/dead-lock-frontend
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install package (* yarn을 추천드립니다.)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```cmd
+$ yarn
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# or
 
-### `npm run eject`
+$ npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. Start
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```cmd
+$ yarn start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# or
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+$ npm run start
+```
 
-## Learn More
+4. Build
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```cmd
+$ yarn build
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# or
+
+$ npm run build
+```
+---
+
+## Path
+
+- `/`: 메인 페이지
+- `/signin`: 로그인 페이지
+- `/signup`: 회원가입 페이지
+- `/test`: 뇌졸중 검사 페이지
+- `/results`: 이전에 진행했던 뇌졸중 검사 결과 리스트 페이지
+- `/results/:id`: 뇌졸중 검사 결과 상세 페이지
+  - `?type=basic`: 종합진단결과
+  - `?type=helpful`: 생활습관 개선 프로그램
+
+---
+## Simple Project Structure
+- `/src/components/pages/*`: 각 Page들을 구성하는 파일들
+- `/src/routers.tsx`: 각 Page파일들을 routing 해주는 파일
+- `/src/theme/*`, `/src/components/common/*`: 디자인 관련 파일들 (GlobalStyle, Reusing Components)
+- `/src/service/*`, `/src/types/service.ts`, `/src/mock/*`: 서버 통신과 관련한 파일들 & Mock Data
+- `/src/store/testStore.ts`: 뇌졸중 검사 시 도출되는 Data State를 모아두는 state management (Store)
+- `/src/utils/*`: front에서 필요한 custom utils
+
+--- 
+## Used Tech Stack List
+- React.js(v18) & TypeScript(v5)
+- styled-components (Styling)
+- axios (API)
+- zustand (State Management)
+
