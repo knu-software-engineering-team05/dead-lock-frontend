@@ -15,11 +15,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker buildx build -f Dockerfile -t ${{env.IMAGE_NAME}} .
+          sudo docker buildx build -f Dockerfile -t ${{env.IMAGE_NAME}} .
 
       - name: Run Docker Image as Container
         run: |
-          docker stop dead-lock-client || true
-          docker rm ${{ env.IMAGE_NAME }} || true
-          docker rmi ${{ env.IMAGE_NAME }} || true
-          docker run -d -p 80:3000 ${{env.IMAGE_NAME}}
+          sudo docker stop dead-lock-client || true
+          sudo docker rm ${{ env.IMAGE_NAME }} || true
+          sudo docker rmi ${{ env.IMAGE_NAME }} || true
+          sudo docker run -d -p 80:3000 ${{env.IMAGE_NAME}}
