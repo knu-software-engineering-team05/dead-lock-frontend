@@ -32,11 +32,17 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-      - name: Pull Docker Image
+      - name: Remove Previous Container and Images
         run: |
           sudo docker stop ${{env.IMAGE_NAME}} || true
           sudo docker rm ${{ env.IMAGE_NAME }} || true
           sudo docker rmi ${{ env.IMAGE_NAME }} || true
+
+      - name: Pull Latest Images
+        run: |
           sudo docker pull ${{secrets.DOCKER_USER}}/${{env.IMAGE_NAME}}:latest
           sudo docker tag ${{secrets.DOCKER_USER}}/${{env.IMAGE_NAME}}:latest ${{env.IMAGE_NAME}}
+
+      - name: Run Container
+        run: |
           sudo docker run -d -p 80:3000 --name ${{env.IMAGE_NAME}} ${{env.IMAGE_NAME}}
