@@ -26,7 +26,7 @@ jobs:
       - name: Docker build Image and Push
         run: |
           docker buildx create --use
-          docker buildx build --platform linux/amd64 -t ${{env.IMAGE_NAME}}:latest --push .
+          docker buildx build --platform linux/amd64 -t ${{secrets.DOCKER_USER}}/${{env.IMAGE_NAME}}:latest --push .
 
   deploy:
     needs: build
@@ -37,6 +37,6 @@ jobs:
           sudo docker stop ${{env.IMAGE_NAME}} || true
           sudo docker rm ${{ env.IMAGE_NAME }} || true
           sudo docker rmi ${{ env.IMAGE_NAME }} || true
-          sudo docker pull toothlessdev/${{env.IMAGE_NAME}}:latest
-          sudo docker tag toothlessdev/${{env.IMAGE_NAME}}:latest ${{env.IMAGE_NAME}}
+          sudo docker pull ${{secrets.DOCKER_USER}}/${{env.IMAGE_NAME}}:latest
+          sudo docker tag ${{secrets.DOCKER_USER}}/${{env.IMAGE_NAME}}:latest ${{env.IMAGE_NAME}}
           sudo docker run -d -p 80:3000 --name ${{env.IMAGE_NAME}} ${{env.IMAGE_NAME}}
